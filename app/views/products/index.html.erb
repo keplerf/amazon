@@ -1,0 +1,19 @@
+<h1>ALl products </h1>
+
+<% @products.each do |prod| %>
+<div class="col-xs-4">
+  <div class="card">
+    <img class="card-img-top img-circle m-x-auto d-block" src="<%= prod.image %>" alt="Card image cap">
+    <div class="card-block">
+      <h5 class="card-title"><%= prod.title %>"</h5>
+      <p class="card-text"><%= link_to prod.title, product_path(prod) %>"</p>
+      <p class="card-text"><%= prod.description.first(80) %>"</p>
+      <a href="<%= product_path(prod) %>" class="btn btn-primary">more detail </a>
+    </div>
+  </div>
+
+
+
+</div>
+
+<% end  %>
