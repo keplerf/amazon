@@ -1,0 +1,11 @@
+<div id="<%= dom_id(review) %>">
+  <%= review.body %>
+  <%= link_to "delete", product_review_path(@product, review),
+                      method: :delete,
+                      # remote: true,
+                      data: {confirm: "Are you sure?"} %>
+  <% user_liked = review.likes.find_by_user_id(current_user) %>
+
+  <%= render '/likes/like' , user_liked: user_liked, review: review %>
+  <hr>
+</div>

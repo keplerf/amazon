@@ -4,23 +4,31 @@ class ReviewsController < ApplicationController
     @review = Review.new params.require(:review).permit(:body,:star)
     @product = Product.find params[:product_id]
     @review.product = @product
+    respond_to do |format|
+      if @review.save
+      # we redirect to the question show page
+      # puts "dsddsdsdsds"
+        format.html {redirect_to product_path(@product), notice: "review created!"}
+        format.js { render :create_review }
 
-    if @review.save
-    # we redirect to the question show page
-      redirect_to product_path(@product), notice: "Answer created!"
-    else
-      flash[:alert] = "please fix errors below"
-      render "/products/show"
+      else
+        flash[:alert] = "please fix errors below"
+        format.html {render "/products/show"}
+        format.js { render :create_failure }
+      end
     end
 
   end
 
   def destroy
-    # render json: params
-    q = Product.find params[:product_id]
-    a = Review.find params[:id]
-    a.destroy
-    redirect_to product_path(q), notice: "Answer deleted"
+    respond_to do |format|
+      # render json: params
+      q = Product.find params[:product_id]
+      a = Review.find params[:id]
+      a.destroy
+      format.html { redirect_to product_path(q), notice: "Answer deleted" }
+      format.js { render }
+    end
 
 
 

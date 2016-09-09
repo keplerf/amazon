@@ -1,0 +1,7 @@
+<span id="<%= user_liked %>">
+  <% if user_liked %>
+    <%=  link_to image_tag("https://www.geogebra.org/wiki/uploads/thumb/b/b3/Icon-heart-filled.png/16px-Icon-heart-filled.png", border: 0), product_review_like_path(@product, review, user_liked), remote: true, method: :delete %>
+  <% else %>
+    <%=  link_to image_tag("http://clipartist.net/social/clipartist.net/H/heart_icon_deselected_ocal_favorites_icon_unselected_black_white_line_art.svg", border: 0), product_review_likes_path(@product, review), remote: true, method: :post %>
+  <% end %>
+</span>

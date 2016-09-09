@@ -1,0 +1,9 @@
+$('#<%= dom_id(@a) %>').fadeOut(1000,
+  function(){
+    $(this).remove();
+  }
+);
+
+
+
+console.log('inside destroy js');

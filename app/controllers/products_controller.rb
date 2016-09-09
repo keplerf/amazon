@@ -9,12 +9,20 @@ class ProductsController < ApplicationController
 
   def index
     @products = Product.order(created_at: :desc).last(20)
+    respond_to do |format|
+       format.html { render }
+       format.json { render json: @products }
+   end
   end
 
   def show
     @product = Product.find params[:id]
     @review = Review.new
     @category = @product.category
+    respond_to do |format|
+       format.html { render }
+       format.json { render json: @product }
+   end
 
   end
 

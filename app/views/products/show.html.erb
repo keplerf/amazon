@@ -16,7 +16,7 @@
   </div>
 <% end %>
 
-<%= form_for [@product, @review] do |f| %>
+<%= form_for [@product, @review], remote: true do |f| %>
   <div class="">
     <%= f.text_area :body %>
   </div>
@@ -29,22 +29,24 @@
     <%= f.radio_button :star, 3 %>
     <%= f.radio_button :star, 4 %>
     <%= f.radio_button :star, 5 %>
-
-
-
     <%#= f.text_field :star %>
   </div>
   <%= f.submit  %>
 <% end  %>
+<% user_favorite = @product.favorite_for current_user %>
 
+  <% if user_favorite.present? %>
+    <%= link_to "unfavorite", product_favorite_path(@product, user_favorite), method: :delete %>
+  <% else %>
+    <%= link_to "favorite", product_favorites_path(@product), method: :post %>
+  <% end %>
 
 <% if @product.reviews.any? %>
   <h2>Review</h2>
-  <% @product.reviews.each do |rev| %>
-    <%= rev.body %>
-    <%= link_to "delete", product_review_path(@product, rev),
-                        method: :delete,
-                        data: {confirm: "Are you sure?"} %>
-    <hr>
-  <% end %>
+  <div id="reviews">
+    <% @product.reviews.each do |rev| %>
+      <%= render '/reviews/review' , review: rev %>
+    <% end %>
+  </div>
+
 <% end %>
