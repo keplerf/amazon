@@ -34,6 +34,9 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'cowsay'
 gem 'rack-cors', :require => 'rack/cors'
 
+gem 'omniauth-twitter'
+gem 'twitter'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
