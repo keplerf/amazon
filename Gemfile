@@ -35,6 +35,7 @@ gem 'cowsay'
 gem 'rack-cors', :require => 'rack/cors'
 
 gem 'omniauth-twitter'
+gem 'omniauth-facebook'
 gem 'twitter'
 
 # Use Capistrano for deployment
@@ -60,6 +61,8 @@ group :development do
   gem 'awesome_print'
   gem 'interactive_editor'
   gem 'hirb'
+  # gem "pry"
+  # gem "pry-rails"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

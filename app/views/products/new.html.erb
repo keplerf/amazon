@@ -30,6 +30,13 @@
        <%= f.collection_select :category_id, Category.all, :id , :title  %>
      </div>
    </div>
+
+   <% if current_user.from_twitter? %>
+     <div class="form-group row">
+       <%= f.label(:tweet_it, class: "col-xs-2 col-form-label") %>
+       <%= f.check_box(:tweet_it) %>
+    </div>
+  <% end %>
    <%= f.submit ("Edit Product"), {class: "btn btn-danger col-xs-offset-2"}%>
 
  <% end %>

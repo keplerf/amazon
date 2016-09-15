@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160824222101) do
+ActiveRecord::Schema.define(version: 20160914223816) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,6 +64,9 @@ ActiveRecord::Schema.define(version: 20160824222101) do
     t.string   "image"
     t.string   "tbn_image"
     t.integer  "category_id"
+    t.string   "user"
+    t.integer  "user_id"
+    t.index ["user_id"], name: "index_products_on_user_id", using: :btree
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -80,9 +83,15 @@ ActiveRecord::Schema.define(version: 20160824222101) do
     t.string   "last_name"
     t.string   "email"
     t.string   "password_digest"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.string   "uid"
+    t.string   "provider"
+    t.string   "twitter_token"
+    t.string   "twitter_secret"
+    t.text     "twitter_raw_data"
     t.index ["email"], name: "index_users_on_email", using: :btree
+    t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", using: :btree
   end
 
   add_foreign_key "favorites", "products"
@@ -90,5 +99,6 @@ ActiveRecord::Schema.define(version: 20160824222101) do
   add_foreign_key "likes", "reviews"
   add_foreign_key "likes", "users"
   add_foreign_key "products", "categories"
+  add_foreign_key "products", "users"
   add_foreign_key "reviews", "products"
 end

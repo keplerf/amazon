@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   post "/contact" => "contact#thankyou",  as: :thankyou
   root "home#index"
 
+  get '/auth/twitter', as: :sign_in_with_twitter
+  get '/auth/twitter/callback' => 'callbacks#twitter'
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :users, only: [:new, :create]
   resources :sessions, only: [:create, :new] do

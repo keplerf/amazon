@@ -1,4 +1,7 @@
 class Product < ApplicationRecord
+
+  attr_accessor :tweet_it
+  
   belongs_to :category
   belongs_to :user
   has_many :reviews, dependent: :destroy
@@ -9,6 +12,8 @@ class Product < ApplicationRecord
 
   has_many :favorites , dependent: :destroy
   has_many :users , through: :favorites
+
+
 
 
 
